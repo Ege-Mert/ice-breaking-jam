@@ -50,7 +50,7 @@ public class ShapeManager : MonoBehaviour
 
     public void HandleShapeCompletion(float accuracy)
     {
-        Debug.Log($"Shape completed with accuracy: {accuracy:F2}");
+       // Debug.Log($"Shape completed with accuracy: {accuracy:F2}");
 
         if (accuracy >= accuracyThresholdForNextLevel)
         {

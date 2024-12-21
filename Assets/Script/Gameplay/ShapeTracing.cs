@@ -27,6 +27,9 @@ public class ShapeTracing : MonoBehaviour
     [SerializeField] private int comboScoreMultiplier = 10; // Score multiplier per combo
     [SerializeField] private float comboProgressBonus = 0.01f; // Additional progress per combo
 
+    [Header("Audio System")]
+    [SerializeField] private AudioSource _audioSource;
+
     private int currentCombo = 0;
     private int maxCombo = 0;
     
@@ -40,6 +43,8 @@ public class ShapeTracing : MonoBehaviour
 
     private void Start()
     {
+        StopAudio();
+        _audioSource.loop = true;
         mainCamera = Camera.main;
         SetupLineRendererLayers();
         SetupGuideLineRenderer();
@@ -52,6 +57,7 @@ public class ShapeTracing : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            PlayAudio();
             StartDrawing();
         }
         else if (Input.GetMouseButton(0))
@@ -60,6 +66,7 @@ public class ShapeTracing : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {
+            StopAudio();
             EndDrawing();
         }
         
@@ -276,5 +283,22 @@ public class ShapeTracing : MonoBehaviour
         
         guideLineRenderer.numCornerVertices = 20;
         guideLineRenderer.numCapVertices = 20;
+    }
+    
+    private void PlayAudio()
+    {
+        if (!_audioSource.isPlaying)
+        {
+            _audioSource.Play();
+        }
+    }
+    
+    private void StopAudio()
+    {
+        // Sesi durdurur
+        if (_audioSource.isPlaying)
+        {
+            _audioSource.Stop();
+        }
     }
 }

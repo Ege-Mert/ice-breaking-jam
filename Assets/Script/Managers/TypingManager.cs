@@ -39,6 +39,9 @@ public class TypingManager : MonoBehaviour
     [Header("ScoreUI")]
     [SerializeField] private TextMeshProUGUI CurrentComboText;
     [SerializeField] private TextMeshProUGUI MaxComboText;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource _audioSource;
     
 
     private string currentLine = "";
@@ -48,8 +51,10 @@ public class TypingManager : MonoBehaviour
 
     private void Start()
     {
+        _audioSource.loop = true;
         SetNewComboThreshold();
         GetNewLine();
+        StopAudio();
     }
 
     private void Update()
@@ -65,6 +70,7 @@ public class TypingManager : MonoBehaviour
             {
                 if (c == currentLine[currentIndex])
                 {
+                    PlayAudio();
                     // Correct character
                     currentIndex++;
                     currentCombo++;
@@ -86,11 +92,7 @@ public class TypingManager : MonoBehaviour
                     currentCombo = 0;
                     GameManager.Instance.codingProgressBar -= 0.05f; // Penalty
 
-                    // Play sound
-                    if (audioSource != null && mistypeSound != null)
-                    {
-                        audioSource.PlayOneShot(mistypeSound);
-                    }
+                    
 
                     // Visual feedback
                     StartCoroutine(FlashBackground());
@@ -104,6 +106,7 @@ public class TypingManager : MonoBehaviour
             if (currentIndex >= currentLine.Length)
             {
                 CompleteCurrentLine();
+                StopAudio();
             }
         }
     }
@@ -125,6 +128,8 @@ public class TypingManager : MonoBehaviour
         string typed = "<color=green>" + currentLine.Substring(0, currentIndex) + "</color>";
         string remaining = "<color=white>" + currentLine.Substring(currentIndex) + "</color>";
         typedText.text = typed + remaining;
+        
+        Debug.Log("ses çalıyor");
     }
     private void GetNewLine()
     {
@@ -201,5 +206,21 @@ public class TypingManager : MonoBehaviour
         yield return new WaitForSeconds(flashDuration);
         backgroundPanel.color = normalColor;
         isFlashing = false;
+    }
+    
+    private void PlayAudio()
+    {
+        if (!_audioSource.isPlaying)
+        {
+            _audioSource.Play();
+        }
+    }
+    
+    private void StopAudio()
+    {
+        if (_audioSource.isPlaying)
+        {
+            _audioSource.Stop();
+        }
     }
 }
