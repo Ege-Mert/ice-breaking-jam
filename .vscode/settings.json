@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "IcreBreaking3.sln"
+    "dotnet.defaultSolution": "ice-breaking-jam3.sln"
 }

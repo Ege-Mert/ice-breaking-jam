@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: CodeLineCollection
+  m_EditorClassIdentifier: Assembly-CSharp::CodeLineCollection
+  easyLines:
+  - text: print
+    difficulty: 0
+    pointValue: 1
+  - text: zesty
+    difficulty: 0
+    pointValue: 1
+  - text: aasa
+    difficulty: 0
+    pointValue: 1
+  mediumLines:
+  - text: for
+    difficulty: 1
+    pointValue: 2
+  hardLines:
+  - text: while
+    difficulty: 2
+    pointValue: 3
