@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,9 +13,6 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     public bool isGameOver = false;
     public int score = 0;
-    [Header("UI Elements")]
-    public Slider codingProgressSlider;
-    public Slider drawingProgressSlider;
     
     private void Start()
     {
@@ -43,10 +39,6 @@ public class GameManager : MonoBehaviour
         // Drain progress bars
         codingProgressBar -= drainRate * Time.deltaTime;
         drawingProgressBar -= drainRate * Time.deltaTime;
-
-        // Update sliders
-        codingProgressSlider.value = codingProgressBar / maxProgressBar;
-        drawingProgressSlider.value = drawingProgressBar / maxProgressBar;
 
         // Check game over condition
         if (codingProgressBar <= 0 || drawingProgressBar <= 0)
