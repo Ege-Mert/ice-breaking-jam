@@ -35,6 +35,11 @@ public class TypingManager : MonoBehaviour
     [SerializeField] private int scorePerCorrectChar = 10;
     [SerializeField] private int penaltyPerMistype = 50;
     private bool isFlashing = false;
+    
+    [Header("ScoreUI")]
+    [SerializeField] private TextMeshProUGUI CurrentComboText;
+    [SerializeField] private TextMeshProUGUI MaxComboText;
+    
 
     private string currentLine = "";
     private string nextLine = "";
@@ -49,6 +54,9 @@ public class TypingManager : MonoBehaviour
 
     private void Update()
     {
+        CurrentComboText.text = currentCombo.ToString();
+        MaxComboText.text = maxCombo.ToString();
+        
         if (GameManager.Instance.isGameOver) return;
 
         foreach (char c in Input.inputString)
